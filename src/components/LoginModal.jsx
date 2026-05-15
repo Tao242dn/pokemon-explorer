@@ -5,6 +5,7 @@ import Modal from './Modal'
 const LoginModal = ({ onClose, onLogin }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleSubmit = (event) => {
@@ -48,16 +49,35 @@ const LoginModal = ({ onClose, onLogin }) => {
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300" htmlFor="login-password">
               Password
             </label>
-            <input
-              autoComplete="current-password"
-              className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:ring-emerald-900"
-              id="login-password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder='Enter password'
-              required
-            />
+            <div className="relative mt-2">
+              <input
+                autoComplete="current-password"
+                className="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 pr-12 text-base text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-50 dark:placeholder:text-slate-500 dark:focus:ring-emerald-900"
+                id="login-password"
+                type={isPasswordVisible ? 'text' : 'password'}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder='Enter password'
+                required
+              />
+              <button
+                aria-label={
+                  isPasswordVisible ? 'Hide password' : 'Show password'
+                }
+                className="absolute right-2 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200 cursor-pointer dark:text-slate-300 dark:hover:bg-slate-800 dark:focus:ring-slate-700"
+                type="button"
+                onClick={() =>
+                  setIsPasswordVisible((currentValue) => !currentValue)
+                }
+              >
+                <i
+                  aria-hidden="true"
+                  className={`fa-solid ${
+                    isPasswordVisible ? 'fa-eye-slash' : 'fa-eye'
+                  }`}
+                ></i>
+              </button>
+            </div>
           </div>
 
           {errorMessage && (
