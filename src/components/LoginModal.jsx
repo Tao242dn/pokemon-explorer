@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { primaryButtonClassName } from '../constants/classNames'
+import Modal from './Modal'
 
 const LoginModal = ({ onClose, onLogin }) => {
   const [email, setEmail] = useState('')
@@ -18,33 +20,14 @@ const LoginModal = ({ onClose, onLogin }) => {
   }
 
   return (
-    <div
-      aria-labelledby="login-title"
-      aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 px-4 py-6"
-      role="dialog"
+    <Modal
+      eyebrow="Account"
+      title="Login"
+      titleId="login-title"
+      onClose={onClose}
     >
-      <div className="w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-600">
-              Account
-            </p>
-            <h2 id="login-title" className="mt-2 text-2xl font-black text-slate-950 dark:text-slate-50">
-              Login
-            </h2>
-          </div>
-          <button
-            aria-label="Close login modal"
-            className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-bold text-slate-600 transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200 cursor-pointer dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800 dark:focus:ring-slate-700"
-            type="button"
-            onClick={onClose}
-          >
-            X
-          </button>
-        </div>
-
-        <form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit}>
+      <div className="p-6">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div>
             <label className="text-sm font-semibold text-slate-700 dark:text-slate-300" htmlFor="login-email">
               Email
@@ -83,15 +66,12 @@ const LoginModal = ({ onClose, onLogin }) => {
             </p>
           )}
 
-          <button
-            className="rounded-lg bg-emerald-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-100 cursor-pointer dark:focus:ring-emerald-900"
-            type="submit"
-          >
+          <button className={primaryButtonClassName} type="submit">
             Login
           </button>
         </form>
       </div>
-    </div>
+    </Modal>
   )
 }
 

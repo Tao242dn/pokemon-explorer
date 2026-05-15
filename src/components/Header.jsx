@@ -1,8 +1,9 @@
+import {
+  iconButtonClassName,
+  primaryButtonClassName,
+} from '../constants/classNames'
 import SearchBox from './SearchBox'
 import UserMenu from './UserMenu'
-
-const iconButtonClassName =
-  'rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200 cursor-pointer dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:focus:ring-slate-700'
 
 const Header = ({
   isDarkTheme,
@@ -32,7 +33,7 @@ const Header = ({
         <div className="flex items-center justify-start gap-3 sm:justify-end">
           <button
             aria-label="Open shopping cart"
-            className={iconButtonClassName}
+            className={`border border-slate-300 ${iconButtonClassName}`}
             type="button"
             onClick={onCartOpen}
           >
@@ -41,7 +42,7 @@ const Header = ({
 
           <button
             aria-label={`Switch to ${isDarkTheme ? 'light' : 'dark'} mode`}
-            className={iconButtonClassName}
+            className={`border border-slate-300 ${iconButtonClassName}`}
             type="button"
             onClick={onThemeToggle}
           >
@@ -51,12 +52,11 @@ const Header = ({
             ></i>
           </button>
 
-
           {user ? (
             <UserMenu onLogout={onLogout} user={user} />
           ) : (
             <button
-              className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-100 cursor-pointer dark:focus:ring-emerald-900"
+              className={primaryButtonClassName}
               type="button"
               onClick={onLoginOpen}
             >

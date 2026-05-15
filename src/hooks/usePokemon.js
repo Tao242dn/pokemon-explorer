@@ -33,20 +33,7 @@ export const usePokemon = (page) => {
     }
   }, [])
 
-  const loadPokemon = useCallback(() => {
-    controllerRef.current?.abort()
-
-    const controller = new AbortController()
-    controllerRef.current = controller
-
-    setStatus('loading')
-    setErrorMessage('')
-    setFailedCount(0)
-
-    fetchWithController(controller, page)
-  }, [fetchWithController, page])
-
-  useEffect(() => {
+  const loadPokemon = useCallback((nextPage = page) => {
     controllerRef.current?.abort()
 
     const controller = new AbortController()
@@ -61,11 +48,17 @@ export const usePokemon = (page) => {
       setErrorMessage('')
       setFailedCount(0)
 
-      fetchWithController(controller, page)
+      fetchWithController(controller, nextPage)
     })
 
-    return () => controller.abort()
+    return controller
   }, [fetchWithController, page])
+
+  useEffect(() => {
+    const controller = loadPokemon(page)
+
+    return () => controller.abort()
+  }, [loadPokemon, page])
 
   return {
     errorMessage,

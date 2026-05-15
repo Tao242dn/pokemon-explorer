@@ -1,4 +1,4 @@
-export const TYPE_CLASS_NAMES = {
+export const POKEMON_TYPES = {
   bug: 'bg-lime-100 text-lime-800',
   dark: 'bg-zinc-800 text-white',
   dragon: 'bg-indigo-100 text-indigo-800',

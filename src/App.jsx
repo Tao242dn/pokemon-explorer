@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react'
 import { POKEMON_TOTAL_PAGES } from './api/pokemon'
+import CartNotification from './components/CartNotification'
 import Header from './components/Header'
 import LoginModal from './components/LoginModal'
 import Pagination from './components/Pagination'
 import PokemonResults from './components/PokemonResults'
 import ShoppingCart from './components/ShoppingCart'
 import { useAuth } from './hooks/useAuth'
+import { useCart } from './hooks/useCart'
 import { usePokemon } from './hooks/usePokemon'
 import { useTheme } from './hooks/useTheme'
 import { filterPokemon } from './utils/pokemon'
@@ -15,6 +17,16 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
+  const {
+    addToCart,
+    cartItems,
+    cartNotification,
+    clearCart,
+    decreaseQuantity,
+    dismissNotification,
+    increaseQuantity,
+    removeFromCart,
+  } = useCart()
   const { isDarkTheme, theme, toggleTheme } = useTheme()
   const { login, logout, user } = useAuth()
   const { errorMessage, failedCount, pokemon, retry, status } = usePokemon(page)
@@ -55,6 +67,7 @@ const App = () => {
           retry={retry}
           status={status}
           totalPages={POKEMON_TOTAL_PAGES}
+          onAddToCart={addToCart}
         />
 
         {status === 'success' && (
@@ -73,11 +86,21 @@ const App = () => {
 
       {isCartOpen && (
         <ShoppingCart
+          cartItems={cartItems}
           user={user}
+          onClearCart={clearCart}
           onClose={() => setIsCartOpen(false)}
+          onDecreaseQuantity={decreaseQuantity}
+          onIncreaseQuantity={increaseQuantity}
           onLoginRequired={() => setIsLoginOpen(true)}
+          onRemoveItem={removeFromCart}
         />
       )}
+
+      <CartNotification
+        notification={cartNotification}
+        onDismiss={dismissNotification}
+      />
     </main>
   )
 }

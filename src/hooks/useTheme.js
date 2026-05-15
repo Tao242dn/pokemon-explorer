@@ -29,8 +29,8 @@ export const useTheme = () => {
   useEffect(() => {
     try {
       window.localStorage.setItem(THEME_STORAGE_KEY, theme)
-    } catch {
-      // Theme persistence is optional; the UI state still works without it.
+    } catch(e) {
+      console.error(e)
     }
   }, [theme])
 

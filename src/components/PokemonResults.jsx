@@ -8,6 +8,7 @@ const PokemonResults = ({
   retry,
   status,
   totalPages,
+  onAddToCart,
 }) => {
   if (status === 'loading') {
     return (
@@ -70,7 +71,7 @@ const PokemonResults = ({
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {pokemon.map((item) => (
             <li key={item.id}>
-              <PokemonCard pokemon={item} />
+              <PokemonCard pokemon={item} onAddToCart={onAddToCart} />
             </li>
           ))}
         </ul>

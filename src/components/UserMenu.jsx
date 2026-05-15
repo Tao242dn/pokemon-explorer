@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-
-const buttonClassName =
-  'flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200 cursor-pointer dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:focus:ring-slate-700'
+import { iconButtonClassName } from '../constants/classNames'
 
 const UserMenu = ({ onLogout, user }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -43,7 +41,7 @@ const UserMenu = ({ onLogout, user }) => {
       <button
         aria-controls="user-menu"
         aria-expanded={isOpen}
-        className={buttonClassName}
+        className={`flex items-center gap-2 ${iconButtonClassName}`}
         type="button"
         onClick={() => setIsOpen((currentIsOpen) => !currentIsOpen)}
       >
