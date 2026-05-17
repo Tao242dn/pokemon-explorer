@@ -8,6 +8,9 @@ The app is client-side only. Pokemon data comes from PokeAPI at runtime, while
 theme, demo users, and the active login session are stored in the browser with
 `localStorage`.
 
+## Video Demo
+https://youtu.be/3vgI-g8_J1A
+
 ## Features
 
 - Browse Pokemon in paginated batches of 100 records.
