@@ -3,6 +3,7 @@ import {
   primaryButtonClassName,
 } from '../constants/classNames'
 import SearchBox from './SearchBox'
+import TypeFilter from './TypeFilter'
 import UserMenu from './UserMenu'
 
 const Header = ({
@@ -12,7 +13,9 @@ const Header = ({
   onLogout,
   onSearchTermChange,
   onThemeToggle,
+  onTypeChange,
   searchTerm,
+  selectedType,
   user,
 }) => {
   return (
@@ -65,10 +68,20 @@ const Header = ({
           )}
         </div>
 
-        <SearchBox
-          searchTerm={searchTerm}
-          onSearchTermChange={onSearchTermChange}
-        />
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <div className="flex-1">
+            <SearchBox
+              searchTerm={searchTerm}
+              onSearchTermChange={onSearchTermChange}
+            />
+          </div>
+          <div className="w-full sm:w-48">
+            <TypeFilter
+              selectedType={selectedType}
+              onTypeChange={onTypeChange}
+            />
+          </div>
+        </div>
       </div>
     </header>
   )

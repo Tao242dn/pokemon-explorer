@@ -39,7 +39,7 @@ const Modal = ({
             type="button"
             onClick={onClose}
           >
-            <i class="fa-solid fa-xmark"></i>
+            <i className="fa-solid fa-xmark text-xl leading-none"></i>
           </button>
         </div>
 

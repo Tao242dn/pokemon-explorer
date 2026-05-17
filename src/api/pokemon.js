@@ -1,8 +1,5 @@
 import { normalizePokemonDetail } from '../utils/pokemon'
-
-const POKEMON_PAGE_SIZE = 100
-const POKEMON_TOTAL_ITEMS = 1000
-export const POKEMON_TOTAL_PAGES = POKEMON_TOTAL_ITEMS / POKEMON_PAGE_SIZE
+import { POKEMON_PAGE_SIZE } from '../constants/pagination'
 
 const API_URL = 'https://pokeapi.co/api/v2/pokemon'
 

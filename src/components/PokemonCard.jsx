@@ -38,19 +38,19 @@ const PokemonCard = ({ onAddToCart, pokemon }) => {
         )}
       </div>
 
-      <div className="mt-4 flex items-start justify-between gap-3">
-        <div className="flex flex-wrap gap-2">
+      <div className="mt-4 flex items-center justify-between gap-3">
+        <div className="flex gap-2">
           {pokemon.types.map((type) => (
             <span
               key={type}
-              className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${getTypeClassName(type)}`}
+              className={`rounded-full px-2 py-1 text-xs font-bold tracking-wide ${getTypeClassName(type)}`}
             >
               {type}
             </span>
           ))}
         </div>
 
-        <p className="shrink-0 rounded-full px-3 py-1 text-[11px] font-extrabold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+        <p className="shrink-0 rounded-full py-1 text-xs font-extrabold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
           Quantity: {DEFAULT_POKEMON_STOCK}
         </p>
       </div>

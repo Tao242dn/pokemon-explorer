@@ -3,10 +3,22 @@ import { MAX_CART_ITEM_QUANTITY } from '../constants/cart'
 import { toTitleCase } from '../utils/string'
 
 const NOTIFICATION_DURATION = 2500
+const CART_STORAGE_KEY = 'poke-explore-cart'
 
 export const useCart = () => {
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const stored = localStorage.getItem(CART_STORAGE_KEY)
+      return stored ? JSON.parse(stored) : []
+    } catch {
+      return []
+    }
+  })
   const [cartNotification, setCartNotification] = useState(null)
+
+  useEffect(() => {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems))
+  }, [cartItems])
 
   useEffect(() => {
     if (!cartNotification) {

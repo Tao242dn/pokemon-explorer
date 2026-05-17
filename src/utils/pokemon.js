@@ -6,15 +6,23 @@ export const normalizeSearchValue = (value) => value.trim().toLowerCase()
 
 export const normalizeIdSearchValue = (value) => normalizeSearchValue(value).replace(/^#/, '').replace(/^0+/, '')
 
-export const filterPokemon = (pokemon, searchTerm) => {
+export const filterPokemon = (pokemon, searchTerm, selectedType) => {
+  let filtered = pokemon;
+
+  if (selectedType && selectedType !== 'all') {
+    filtered = filtered.filter((item) =>
+      item.types.some((type) => type.toLowerCase() === selectedType.toLowerCase())
+    );
+  }
+
   const query = normalizeSearchValue(searchTerm)
   const idQuery = normalizeIdSearchValue(searchTerm)
 
   if (!query) {
-    return pokemon
+    return filtered
   }
 
-  return pokemon.filter((item) => {
+  return filtered.filter((item) => {
     const id = String(item.id)
     const formattedId = formatPokemonId(item.id).toLowerCase()
     const matchesId =

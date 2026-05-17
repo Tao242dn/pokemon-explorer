@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { POKEMON_TOTAL_PAGES } from './api/pokemon'
+import { POKEMON_TOTAL_PAGES } from './constants/pagination'
 import CartNotification from './components/CartNotification'
 import Header from './components/Header'
 import LoginModal from './components/LoginModal'
@@ -10,11 +10,13 @@ import { useAuth } from './hooks/useAuth'
 import { useCart } from './hooks/useCart'
 import { usePokemon } from './hooks/usePokemon'
 import { useTheme } from './hooks/useTheme'
+import { useUrlState } from './hooks/useUrlState'
 import { filterPokemon } from './utils/pokemon'
 
 const App = () => {
-  const [page, setPage] = useState(1)
-  const [searchTerm, setSearchTerm] = useState('')
+  const [page, setPage] = useUrlState('page', 1, 'number')
+  const [searchTerm, setSearchTerm] = useUrlState('search', '', 'string')
+  const [selectedType, setSelectedType] = useUrlState('type', 'all', 'string')
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const {
@@ -36,8 +38,8 @@ const App = () => {
   )
 
   const filteredPokemon = useMemo(() => {
-    return filterPokemon(pokemon, searchTerm)
-  }, [pokemon, searchTerm])
+    return filterPokemon(pokemon, searchTerm, selectedType)
+  }, [pokemon, searchTerm, selectedType])
 
   const goToPage = (nextPage) => {
     setPage(Math.min(Math.max(nextPage, 1), POKEMON_TOTAL_PAGES))
@@ -51,12 +53,14 @@ const App = () => {
         <Header
           isDarkTheme={isDarkTheme}
           searchTerm={searchTerm}
+          selectedType={selectedType}
           user={user}
           onCartOpen={() => setIsCartOpen(true)}
           onLoginOpen={() => setIsLoginOpen(true)}
           onLogout={logout}
           onSearchTermChange={setSearchTerm}
           onThemeToggle={toggleTheme}
+          onTypeChange={setSelectedType}
         />
 
         <PokemonResults
