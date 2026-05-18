@@ -25,7 +25,6 @@ const App = () => {
     cartNotification,
     clearCart,
     decreaseQuantity,
-    dismissNotification,
     increaseQuantity,
     removeFromCart,
   } = useCart()
@@ -103,7 +102,6 @@ const App = () => {
 
       <CartNotification
         notification={cartNotification}
-        onDismiss={dismissNotification}
       />
     </main>
   )
