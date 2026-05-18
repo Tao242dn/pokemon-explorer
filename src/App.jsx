@@ -19,6 +19,8 @@ const App = () => {
   const [selectedType, setSelectedType] = useUrlState('type', 'all', 'string')
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
+  const { isDarkTheme, theme, toggleTheme } = useTheme()
+  const { login, logout, user } = useAuth()
   const {
     addToCart,
     cartItems,
@@ -27,9 +29,7 @@ const App = () => {
     decreaseQuantity,
     increaseQuantity,
     removeFromCart,
-  } = useCart()
-  const { isDarkTheme, theme, toggleTheme } = useTheme()
-  const { login, logout, user } = useAuth()
+  } = useCart(user?.email)
   const { errorMessage, failedCount, pokemon, retry, status } = usePokemon(page)
   const pageNumbers = useMemo(
     () => Array.from({ length: POKEMON_TOTAL_PAGES }, (_, index) => index + 1),
