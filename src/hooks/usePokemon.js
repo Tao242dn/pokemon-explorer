@@ -39,17 +39,11 @@ export const usePokemon = (page) => {
     const controller = new AbortController()
     controllerRef.current = controller
 
-    queueMicrotask(() => {
-      if (controller.signal.aborted) {
-        return
-      }
+    setStatus('loading')
+    setErrorMessage('')
+    setFailedCount(0)
 
-      setStatus('loading')
-      setErrorMessage('')
-      setFailedCount(0)
-
-      fetchWithController(controller, nextPage)
-    })
+    fetchWithController(controller, nextPage)
 
     return controller
   }, [fetchWithController, page])
